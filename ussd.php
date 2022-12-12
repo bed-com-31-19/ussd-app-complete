@@ -39,7 +39,6 @@
      */
     if ($level == 0) {
         display_menu();
-
     }
 
     // $level>0 means the user has entered an option
@@ -58,19 +57,11 @@
                 break;
 
         }
-
     }
-
-
-
-
-
-
 
     function display_menu() {
         $ussd_string = "WELCOME TO ULIMI WATHU \n \n 1. Crop production \n 2. Animal production \n";
         ussd_proceed($ussd_string);
-
     }
 
     function crop_production($ussd_string_exploded) {
@@ -115,32 +106,22 @@
                                                         $ussd_string .= "Enter N for next";
                                                         ussd_proceed($ussd_string);
 
-
                                                         if (count($ussd_string_exploded) == 9) {
                                                             $ussd_string = "Shell and bag when the crop is at 12.5% moisture content. Remember to treat with pesticide to avoid weavil.\n";
                                                             $ussd_string .= "Thank you for using Ulimi wathu app";
-                                                            ussd_stop($ussd_string);
-                                                            
+                                                            ussd_stop($ussd_string);  
 
                                                         }
-
                                                     }
-
                                                 }
-
                                             }
                                         }
-
                                         break;
 
                                     case 2:
                                         break;    
-
-                                }
-                                
-                            
-                            }
-                            
+                                }  
+                            } 
                         }     
                         break;    
 
@@ -156,8 +137,7 @@
 
                 }
             }
-        }
-        
+        }   
     }
 
     function animal_production($ussd_string_exploded) {
