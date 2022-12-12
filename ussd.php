@@ -85,8 +85,61 @@
                         ussd_proceed($ussd_string);
 
                         if (count($ussd_string_exploded) == 3) {
-                            $ussd_string = "Please Select \n \n1. husbandry practices \n2. pests and dieseases \n";
+                            $ussd_string = "Please Select: \n \n1. Husbandry practices \n2. Pests and dieseases \n";
                             ussd_proceed($ussd_string);
+
+                            if (count($ussd_string_exploded) == 4) {
+                                switch ($ussd_string_exploded[3]) {
+                                    case 1:
+                                        $ussd_string = "Clear the land as early as possible before November for summer crop.\n";
+                                        $ussd_string .= "Make ridges or rows at 60 - 75cm.\nEnter N for next";
+                                        ussd_proceed($ussd_string);
+
+                                        if (count($ussd_string_exploded) == 5) {
+                                            $ussd_string = "Plant one seed per station, spaced at 25 - 30cm.\n";
+                                            $ussd_string .= "Seed need around 25kg/ha or 10kg/acre.\nEnter N for next";
+                                            ussd_proceed($ussd_string);
+
+                                            if (count($ussd_string_exploded) == 6) {
+                                                $ussd_string = "Apply 100 kg basal fertilizer preferably 23:21:0 + 4s at 5gms / plant just after emegency.\n";
+                                                $ussd_string .= "Keep the field weed free all the time.\nEnter N for next";
+                                                ussd_proceed($ussd_string);
+
+                                                if (count($ussd_string_exploded) == 7) {
+                                                    $ussd_string = "Apply top dressing fertlizer like urea, when plants are 30cm high or 21 days after emergency.\n";
+                                                    $ussd_string .= "Keep the field weed free all the time.\nEnter N for next";
+                                                    ussd_proceed($ussd_string);
+                                                    
+                                                    if (count($ussd_string_exploded) == 8) {
+                                                        $ussd_string = "Harvest when the crop is at 18% moisture content and leave it to dry in granaries.\n";
+                                                        $ussd_string .= "Enter N for next";
+                                                        ussd_proceed($ussd_string);
+
+
+                                                        if (count($ussd_string_exploded) == 9) {
+                                                            $ussd_string = "Shell and bag when the crop is at 12.5% moisture content. Remember to treat with pesticide to avoid weavil.\n";
+                                                            $ussd_string .= "Thank you for using Ulimi wathu app";
+                                                            ussd_stop($ussd_string);
+                                                            
+
+                                                        }
+
+                                                    }
+
+                                                }
+
+                                            }
+                                        }
+
+                                        break;
+
+                                    case 2:
+                                        break;    
+
+                                }
+                                
+                            
+                            }
                             
                         }     
                         break;    
