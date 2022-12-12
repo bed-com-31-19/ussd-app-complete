@@ -46,12 +46,16 @@
     else if ($level > 0) {
         switch($ussd_string_explode[0]) {
             case 1:
-                crop_production();
+                crop_production($ussd_string_explode);
                 break;
             
             case 2:
-                animal_production();
-                break;    
+                animal_production($ussd_string_explode);
+                break;  
+               
+            default:
+                echo "Invalid response";    
+                break;
 
         }
 
@@ -69,12 +73,41 @@
 
     }
 
-    function crop_production() {
-        $ussd_string = "CON Please Select: \n \n 1. Maize production \n 2. Groundnuts production \n";
-        ussd_proceed($ussd_string);
+    function crop_production($ussd_string_exploded) {
+        if (count($ussd_string_exploded) == 1) {
+            $ussd_string = "CON Please Select: \n \n 1. Maize production \n 2. Groundnuts production \n";
+            ussd_proceed($ussd_string);
+
+            if (count($ussd_string_exploded) == 2) {
+                switch ($ussd_string_exploded[1]) {
+                    case 1:
+                        $ussd_string = "Please Select: \n \n1. SC 719(Njobvu) \n2. SC 627 (Mkango)\n";
+                        ussd_proceed($ussd_string);
+
+                        if (count($ussd_string_exploded) == 3) {
+                            $ussd_string = "Please Select \n \n1. husbandry practices \n2. pests and dieseases \n";
+                            ussd_proceed($ussd_string);
+                            
+                        }     
+                        break;    
+
+                    case 2:
+                        $ussd_string = "Select your groundnuts variety: \n \n1. Chalimbana\n";
+                        ussd_proceed($ussd_string);
+                        break; 
+                    
+                    default:
+                            echo "Invalid response";
+                            break;
+
+
+                }
+            }
+        }
+        
     }
 
-    function animal_production() {
+    function animal_production($ussd_string_exploded) {
         $ussd_string = "Please Select: \n \n 1. Chicken production \n 2. Sheep production \n";
         ussd_proceed($ussd_string);
     }
@@ -96,7 +129,6 @@
     function ussd_stop($ussd_string){
         echo "END $ussd_string";
     }
-   
      
 
 ?>
