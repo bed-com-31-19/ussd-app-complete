@@ -81,7 +81,7 @@
                 ussd_proceed($ussd_string); 
             }
             else if ($option == "2") {
-                $ussd_string = "Please Select Maize Variety: \n \n1. Chalimbana\n";
+                $ussd_string = "Please Select Groundnuts Variety: \n \n1. Chalimbana\n";
                 ussd_proceed($ussd_string);
             }
 
@@ -92,10 +92,11 @@
 
         else if (count($ussd_string_exploded) == 3) {
             $option = $ussd_string_exploded[2];
-            if ($option == "1") {
+            if ($option == "1" || $option == "2") {
                 $ussd_string = "Please Select: \n \n1. Husbandry practices \n2. Pests and dieseases \n";
                 ussd_proceed($ussd_string);
             }
+           
 
             else {
                 echo "Invalid input";
@@ -111,15 +112,31 @@
                 $ussd_string .= "Make ridges or rows at 60 - 75cm.\nEnter N for next";
                 ussd_proceed($ussd_string);
             }
-
-            else if ($option == "2") {
+             else if ($option == "2") {
                 echo "Paste and diseases menu";
             }
 
+        
             else {
                 echo "Invalid input";
             }
         }
+
+        else if(count($ussd_string_exploded) == 4 && $ussd_string_exploded[2] == 2) {
+            $option = $ussd_string_exploded[3];
+
+            if($option == "1") {
+                $ussd_string = "Mkango page 1\n";
+                $ussd_string .= "\nEnter N for next";
+                ussd_proceed($ussd_string);
+            }
+
+        
+            else {
+                echo "Invalid input";
+            }
+        }
+
         else if (count($ussd_string_exploded) == 5 && $ussd_string_exploded[2] == 1) {
             $option = $ussd_string_exploded[4];
 
@@ -134,12 +151,43 @@
             }
 
         }
+
+        else if (count($ussd_string_exploded) == 5 && $ussd_string_exploded[2] == 2) {
+            $option = $ussd_string_exploded[4];
+
+            if($option == "N" || $option == "n") {
+                $ussd_string = "Mkango page 2\n";
+                $ussd_string .= " \nEnter N for next";
+                ussd_proceed($ussd_string);
+            }
+
+            else {
+                echo "Invalid input";
+            }
+
+        }
+
+
         else if (count($ussd_string_exploded) == 6 && $ussd_string_exploded[2] == 1) {
             $option = $ussd_string_exploded[5];
 
             if($option == "N" || $option == "n") {
                 $ussd_string = "Apply 100 kg basal fertilizer preferably 23:21:0 + 4s at 5gms / plant just after emegency.\n";
                 $ussd_string .= "Keep the field weed free all the time.\n \nEnter N for next";
+                ussd_proceed($ussd_string);
+            }
+
+            else {
+                echo "Invalid input";
+            }
+        }
+
+        else if (count($ussd_string_exploded) == 6 && $ussd_string_exploded[2] == 2) {
+            $option = $ussd_string_exploded[5];
+
+            if($option == "N" || $option == "n") {
+                $ussd_string = "Mkango page 3.\n";
+                $ussd_string .= "\nEnter N for next";
                 ussd_proceed($ussd_string);
             }
 
@@ -161,6 +209,23 @@
             }
 
         }
+
+        else if (count($ussd_string_exploded) == 7 && $ussd_string_exploded[2] == 2) {
+            $option = $ussd_string_exploded[6];
+
+            if($option == "N" || $option == "n") {
+                $ussd_string = "Mkango page 4.\n";
+                $ussd_string .= "\nEnter N for next";
+                ussd_proceed($ussd_string);
+            }
+
+            else {
+                echo "Invalid input";
+            }
+
+        }
+
+
         else if (count($ussd_string_exploded) == 8 && $ussd_string_exploded[2] == 1) {
             $option = $ussd_string_exploded[7];
 
@@ -175,6 +240,22 @@
             }
 
         }
+
+        else if (count($ussd_string_exploded) == 8 && $ussd_string_exploded[2] == 2) {
+            $option = $ussd_string_exploded[7];
+
+            if($option == "N" || $option == "n") {
+                $ussd_string = "Mkango page 5\n";
+                $ussd_string .= "\nEnter N for next";
+                ussd_proceed($ussd_string);
+            }
+
+            else {
+                echo "Invalid input";
+            }
+
+        }
+
         else if (count($ussd_string_exploded) == 9 && $ussd_string_exploded[2] == 1) {
             $option = $ussd_string_exploded[8];
 
@@ -190,6 +271,8 @@
         }
 
     }
+
+
 
     function animal_production($ussd_string_exploded) {
         $ussd_string = "Please Select: \n \n 1. Chicken production \n 2. Sheep production \n";
