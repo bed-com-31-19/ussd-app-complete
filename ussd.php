@@ -55,7 +55,7 @@
                 break;  
                
             default:
-                echo "Invalid response";    
+                echo "Invalid response"; 
                 break;
 
         }
@@ -73,61 +73,66 @@
             ussd_proceed($ussd_string);	  
         }
 
+
         else if (count($ussd_string_exploded) == 2) {
             $option = $ussd_string_exploded[1];
+            switch ($option) {
+                case 1: 
+                    $ussd_string = "Please Select: \n \n1. Husbandry practices \n2. Pests and dieseases \n";
+                    ussd_proceed($ussd_string);
+                    break;
 
-            if($option == "1") {
-                $ussd_string = "Please Select Maize Variety: \n \n1. SC 719(Njobvu) \n2. SC 627 (Mkango)\n";
-                ussd_proceed($ussd_string); 
-            }
-            else if ($option == "2") {
-                $ussd_string = "Please Select Groundnuts Variety: \n \n1. Chalimbana\n";
-                ussd_proceed($ussd_string);
-            }
+                case 2: 
+                    groundnuts_production($ussd_string_exploded);
+                    break;
 
-            else {
-                echo "Invalid input";
-            }        
-        }
+                default:
+                    echo "Invalid response";
+                    break;
 
-        else if (count($ussd_string_exploded) == 3) {
-            $option = $ussd_string_exploded[2];
-            if ($option == "1" || $option == "2") {
-                $ussd_string = "Please Select: \n \n1. Husbandry practices \n2. Pests and dieseases \n";
-                ussd_proceed($ussd_string);
+
             }
+            // if ($option == "1") {
+            //     $ussd_string = "Please Select: \n \n1. Husbandry practices \n2. Pests and dieseases \n";
+            //     ussd_proceed($ussd_string);
+            // }
+
+            // else if ($option == "2") {
+            //     // echo $ussd_string_exploded;
+            //     groundnuts_production($ussd_string_exploded);
+                
+            // }
            
 
-            else {
-                echo "Invalid input";
-            } 
+            // else {
+            //     echo "Invalid input";
+            // } 
            
         }
 
-        else if(count($ussd_string_exploded) == 4 && $ussd_string_exploded[2] == 1) {
-            $option = $ussd_string_exploded[3];
+        else if(count($ussd_string_exploded) == 3) {
+            $option1 = $ussd_string_exploded[0];
+            $option2 = $ussd_string_exploded[1];
+            $option3 = $ussd_string_exploded[2];
+            print_r($ussd_string_exploded);
 
-            if($option == "1") {
+            if($option1 == "1" && $option2 == "1" && $option3 == "1") {
                 $ussd_string = "Clear the land as early as possible before November for summer crop.\n";
                 $ussd_string .= "Make ridges or rows at 60 - 75cm.\nEnter N for next";
                 ussd_proceed($ussd_string);
             }
-             else if ($option == "2") {
-                echo "Paste and diseases menu";
+
+            //groundnuts practices
+            else if ($option1 == "1" && $option2 == "2" && $option3 == "1") {
+                $ussd_string = "groundnuts practices 1\n";
+                $ussd_string .= "groundnuts practices 1.\nEnter N for next";
+                ussd_proceed($ussd_string);
             }
 
-        
-            else {
-                echo "Invalid input";
-            }
-        }
-
-        else if(count($ussd_string_exploded) == 4 && $ussd_string_exploded[2] == 2) {
-            $option = $ussd_string_exploded[3];
-
-            if($option == "1") {
-                $ussd_string = "Mkango page 1\n";
-                $ussd_string .= "\nEnter N for next";
+            //pest and disease control
+            else if ($option1 == "1" && $option2 == "2" && $option3 == "2") {
+                $ussd_string = "Please Select \n \n1. Disease and Control 1\n";
+                $ussd_string .= "2. Pest and Control 1.\n";
                 ussd_proceed($ussd_string);
             }
 
@@ -137,138 +142,291 @@
             }
         }
 
-        else if (count($ussd_string_exploded) == 5 && $ussd_string_exploded[2] == 1) {
-            $option = $ussd_string_exploded[4];
+   
 
-            if($option == "N" || $option == "n") {
-                $ussd_string = "Plant one seed per station, spaced at 25 - 30cm.\n";
-                $ussd_string .= "Seed need around 25kg/ha or 10kg/acre.\n \nEnter N for next";
+        else if (count($ussd_string_exploded) == 4) {
+            $option1 = $ussd_string_exploded[0];
+            $option2 = $ussd_string_exploded[1];
+            $option3 = $ussd_string_exploded[2];
+            $option4 = $ussd_string_exploded[3];
+            print_r($ussd_string_exploded);
+
+
+
+
+            /* 
+            *handle groundnuts level 4
+            *
+            *
+            */
+            if ($option1 == "1" && $option2 == "2" && $option3 == "1" && $option4 == "n" || $option4 == "N") {
+                $ussd_string = "groundnuts practices 2\n";
+                $ussd_string .= "groundnuts practices 2.\nEnter N for next";
                 ussd_proceed($ussd_string);
             }
 
-            else {
-                echo "Invalid input";
-            }
-
-        }
-
-        else if (count($ussd_string_exploded) == 5 && $ussd_string_exploded[2] == 2) {
-            $option = $ussd_string_exploded[4];
-
-            if($option == "N" || $option == "n") {
-                $ussd_string = "Mkango page 2\n";
-                $ussd_string .= " \nEnter N for next";
+            else if ($option1 == "1" && $option2 == "2" && $option3 == "2" && $option4 == "1") {
+                $ussd_string = "Desease 1\n";
+                $ussd_string .= "Desease 2.\n";
+                $ussd_string .= "Desease 3.\nEnter N for next";
                 ussd_proceed($ussd_string);
             }
 
-            else {
-                echo "Invalid input";
-            }
-
-        }
-
-
-        else if (count($ussd_string_exploded) == 6 && $ussd_string_exploded[2] == 1) {
-            $option = $ussd_string_exploded[5];
-
-            if($option == "N" || $option == "n") {
-                $ussd_string = "Apply 100 kg basal fertilizer preferably 23:21:0 + 4s at 5gms / plant just after emegency.\n";
-                $ussd_string .= "Keep the field weed free all the time.\n \nEnter N for next";
+            else if ($option1 == "1" && $option2 == "2" && $option3 == "2" && $option4 == "2") {
+                $ussd_string = "Pest 1\n";
+                $ussd_string .= "Pest 2.\n";
+                $ussd_string .= "Pest 3.\nEnter N for next";
                 ussd_proceed($ussd_string);
             }
 
+            // if($option == "N" || $option == "n") {
+            //     $ussd_string = "Plant one seed per station, spaced at 25 - 30cm.\n";
+            //     $ussd_string .= "Seed need around 25kg/ha or 10kg/acre.\n \nEnter N for next";
+            //     ussd_proceed($ussd_string);
+            // }
+
             else {
                 echo "Invalid input";
             }
+
         }
 
-        else if (count($ussd_string_exploded) == 6 && $ussd_string_exploded[2] == 2) {
-            $option = $ussd_string_exploded[5];
 
-            if($option == "N" || $option == "n") {
-                $ussd_string = "Mkango page 3.\n";
-                $ussd_string .= "\nEnter N for next";
+
+
+        else if (count($ussd_string_exploded) == 5) {
+            $option1 = $ussd_string_exploded[0];
+            $option2 = $ussd_string_exploded[1];
+            $option3 = $ussd_string_exploded[2];
+            $option4 = $ussd_string_exploded[3];
+            $option5 = $ussd_string_exploded[4];
+            print_r($ussd_string_exploded);
+
+
+            /* 
+            * handle groundnuts level 5
+            *
+            */
+            if ($option1 == "1" && $option2 == "2" && $option3 == "1" && $option4 == "n" && $option4 == "N" && $option5 == "n" || $option5 == "N") {
+                $ussd_string = "groundnuts practices 3\n";
+                $ussd_string .= "groundnuts practices 3.\nEnter N for next";
                 ussd_proceed($ussd_string);
             }
 
-            else {
-                echo "Invalid input";
-            }
-        }
-        else if (count($ussd_string_exploded) == 7 && $ussd_string_exploded[2] == 1) {
-            $option = $ussd_string_exploded[6];
-
-            if($option == "N" || $option == "n") {
-                $ussd_string = "Apply top dressing fertlizer like urea, when plants are 30cm high or 21 days after emergency.\n";
-                $ussd_string .= "\nEnter N for next";
+            else if ($option1 == "1" && $option2 == "2" && $option3 == "2" && $option4 == "1" && $option5 == "n" || $option5 == "N") {
+                $ussd_string = "Desease Control page 1\n";
+                $ussd_string .= "Desease Contol page 1.\n";
+                $ussd_string .= "Desease Control page 1.\nEnter N for next";
                 ussd_proceed($ussd_string);
             }
 
-            else {
-                echo "Invalid input";
-            }
-
-        }
-
-        else if (count($ussd_string_exploded) == 7 && $ussd_string_exploded[2] == 2) {
-            $option = $ussd_string_exploded[6];
-
-            if($option == "N" || $option == "n") {
-                $ussd_string = "Mkango page 4.\n";
-                $ussd_string .= "\nEnter N for next";
+            else if ($option1 == "1" && $option2 == "2" && $option3 == "2" && $option4 == "2" && $option5 == "1") {
+                $ussd_string = "Pest 1 Control\n";
+                $ussd_string .= "Pest 1 Control.\n";
+                $ussd_string .= "Pest 1 Control.\nEnter N for next";
                 ussd_proceed($ussd_string);
             }
 
-            else {
-                echo "Invalid input";
-            }
-
-        }
-
-
-        else if (count($ussd_string_exploded) == 8 && $ussd_string_exploded[2] == 1) {
-            $option = $ussd_string_exploded[7];
-
-            if($option == "N" || $option == "n") {
-                $ussd_string = "Harvest when the crop is at 18% moisture content and leave it to dry in granaries.\n";
-                $ussd_string .= "\nEnter N for next";
+            else if ($option1 == "1" && $option2 == "2" && $option3 == "2" && $option4 == "2" && $option5 == "2") {
+                $ussd_string = "Pest 2 Control\n";
+                $ussd_string .= "Pest 2 Control.\n";
+                $ussd_string .= "Pest 2 Control.\nEnter N for next";
                 ussd_proceed($ussd_string);
             }
 
-            else {
-                echo "Invalid input";
-            }
-
-        }
-
-        else if (count($ussd_string_exploded) == 8 && $ussd_string_exploded[2] == 2) {
-            $option = $ussd_string_exploded[7];
-
-            if($option == "N" || $option == "n") {
-                $ussd_string = "Mkango page 5\n";
-                $ussd_string .= "\nEnter N for next";
+            else if ($option1 == "1" && $option2 == "2" && $option3 == "2" && $option4 == "2" && $option5 == "3") {
+                $ussd_string = "Pest 3 Control\n";
+                $ussd_string .= "Pest 3 Control.\n";
+                $ussd_string .= "Pest 3 Control.\nEnter N for next";
                 ussd_proceed($ussd_string);
             }
 
+            // if($option == "N" || $option == "n") {
+            //     $ussd_string = "Apply 100 kg basal fertilizer preferably 23:21:0 + 4s at 5gms / plant just after emegency.\n";
+            //     $ussd_string .= "Keep the field weed free all the time.\n \nEnter N for next";
+            //     ussd_proceed($ussd_string);
+            // }
+
             else {
                 echo "Invalid input";
             }
-
         }
 
-        else if (count($ussd_string_exploded) == 9 && $ussd_string_exploded[2] == 1) {
-            $option = $ussd_string_exploded[8];
+       
+        // else if (count($ussd_string_exploded) == 6 && $ussd_string_exploded[2] == 1) {
+        //     $option = $ussd_string_exploded[6];
 
-            if($option == "N" || $option == "n") {
-                $ussd_string = "Shell and bag when the crop is at 12.5% moisture content. Remember to treat with pesticide to avoid weavil.\n";
-                $ussd_string .= "\nThank you for using Ulimi wathu app";
-                ussd_stop($ussd_string);
-            }
-            else {
-                echo "Invalid input";
-            }
+        //     if($option == "N" || $option == "n") {
+        //         $ussd_string = "Apply top dressing fertlizer like urea, when plants are 30cm high or 21 days after emergency.\n";
+        //         $ussd_string .= "\nEnter N for next";
+        //         ussd_proceed($ussd_string);
+        //     }
+
+        //     else {
+        //         echo "Invalid input";
+        //     }
+
+        // }
+
+
+        // else if (count($ussd_string_exploded) == 7 && $ussd_string_exploded[2] == 1) {
+        //     $option = $ussd_string_exploded[7];
+
+        //     if($option == "N" || $option == "n") {
+        //         $ussd_string = "Harvest when the crop is at 18% moisture content and leave it to dry in granaries.\n";
+        //         $ussd_string .= "\nEnter N for next";
+        //         ussd_proceed($ussd_string);
+        //     }
+
+        //     else {
+        //         echo "Invalid input";
+        //     }
+
+        // }
+
+
+
+        // else if (count($ussd_string_exploded) == 8 && $ussd_string_exploded[2] == 1) {
+        //     $option = $ussd_string_exploded[8];
+
+        //     if($option == "N" || $option == "n") {
+        //         $ussd_string = "Shell and bag when the crop is at 12.5% moisture content. Remember to treat with pesticide to avoid weavil.\n";
+        //         $ussd_string .= "\nThank you for using Ulimi wathu app";
+        //         ussd_stop($ussd_string);
+        //     }
+        //     else {
+        //         echo "Invalid input";
+        //     }
+
+        // }  
+
+    }
+
+
+
+    function groundnuts_production($ussd_string_exploded) {
+        if (count($ussd_string_exploded) == 2) {
+            $ussd_string = "Please Select: \n \n1. Husbandry practices \n2. Pests and dieseases \n";
+            ussd_proceed($ussd_string);
 
         }
+        
+            
+ 
+            print_r($ussd_string_exploded);
+            if (count($ussd_string_exploded) == 3) {
+                $option = $ussd_string_exploded[2];
+
+                if ($option == "1") {
+                    $ussd_string = "groundnuts practices 1\n";
+                    $ussd_string .= "groundnuts practices 1.\nEnter N for next";
+                    ussd_proceed($ussd_string);
+
+                    
+                }
+
+                else if ($option == "2") {
+                    $ussd_string = "Please Select \n \n1. Disease and Control 1\n";
+                    $ussd_string .= "2. Pest and Control 1.\n";
+                    ussd_proceed($ussd_string);
+                    
+                }
+
+                else {
+                    echo "invalid input";
+                }
+
+                
+
+            }
+            
+            
+            
+            else if (count($ussd_string_exploded) == 4) {
+                print_r($ussd_string_exploded);
+                $option = $ussd_string_exploded[2];
+
+                if ($option == "n" || $option == "N") {
+                    $ussd_string = "groundnuts practices 2\n";
+                    $ussd_string .= "groundnuts practices 2.\nEnter N for next";
+                    ussd_proceed($ussd_string);
+                }
+
+                else if ($option == "1") {
+                    $ussd_string = "Desease 1\n";
+                    $ussd_string .= "Desease 2.\n";
+                    $ussd_string .= "Desease 3.\nEnter N for next";
+                    ussd_proceed($ussd_string);
+
+                }
+
+                else if ($option == "2") {
+                    $ussd_string = "Pest 1\n";
+                    $ussd_string .= "Pest 2.\n";
+                    $ussd_string .= "Pest 3.\nEnter N for next";
+                    ussd_proceed($ussd_string);
+
+                }
+                
+            }
+
+            else if (count($ussd_string_exploded) == 4 ) {
+                print_r($ussd_string_exploded);
+                $option = $ussd_string_exploded[3];
+
+                if ($option == "n" || $option == "N") {
+                    $ussd_string = "groundnuts practices 3\n";
+                    $ussd_string .= "groundnuts practices 3.\nEnter N for next";
+                    ussd_proceed($ussd_string);
+
+                }
+
+                else if ($option == "1" && $ussd_string_exploded[2] == "1") {
+                    $ussd_string = "Desease control\n";
+                    $ussd_string .= "Desease control\n";
+                    $ussd_string .= "Desease control\nEnter N for next";
+                    ussd_proceed($ussd_string);
+                    
+
+                }
+
+                else if ($option == "1" && $ussd_string_exploded[2] == "2") {
+                    $ussd_string = "Pest 1 control\n";
+                    $ussd_string .= "Pest 1 control\n";
+                    $ussd_string .= "Pest 1 control\nEnter N for next";
+                    ussd_proceed($ussd_string);
+                    
+
+                }
+
+                else if ($option == "2" && $ussd_string_exploded[2] == "2") {
+                    $ussd_string = "Pest 2 control\n";
+                    $ussd_string .= "Pest 2 control\n";
+                    $ussd_string .= "Pest 2 control\nEnter N for next";
+                    ussd_proceed($ussd_string);
+                    
+
+                }
+
+                else if ($option == "3" && $ussd_string_exploded[2] == "2") {
+                    $ussd_string = "Pest 3 control\n";
+                    $ussd_string .= "Pest 3 control\n";
+                    $ussd_string .= "Pest 3 control\nEnter N for next";
+                    ussd_proceed($ussd_string);
+                    
+
+                }
+                
+            }
+
+
+
+            // else if (count($ussd_string_exploded) == 5 && $ussd_string_exploded[5] == "n" || $ussd_string_exploded[5] =="N") {
+                
+            //     $ussd_string = "groundnuts practices 5\n";
+            //     $ussd_string .= "groundnuts practices 5.\nEnter N for next";
+            //     ussd_proceed($ussd_string);
+            // }
 
     }
 
@@ -296,6 +454,17 @@
     function ussd_stop($ussd_string){
         echo "END $ussd_string";
     }
+
+    
      
+
+
+
+
+
+
+
+
+
 
 ?>
