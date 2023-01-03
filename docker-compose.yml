@@ -1,25 +1,35 @@
-version "3.9":
-  services:
-    mysql_DB:
-      image: mysql:latest
-      container_name: mysql_DB
-      ports:
-        - "3307:3306"
-      environment:
-        MYSQL_USER: mysql
-        MYSQL_PASSWORD: password
-        MYSQL_ROOT_PASSWORD: password
-        MYSQL_DATABASE: users
-      restart: always
-      volumes:
-        - 
-      networks:
-        - ussd-app-network
-    
-    ussd-app-php:
-      image:
-        build:
+version: '3.9'
+services:
+  ussd_web:
+    container_name: ussd_web
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8000:80
+    depends_on:
+      - db
+    volumes:
+      - ./:/var/www/html/
+ 
+  db:
+    container_name: mysql_DB
+    image: mysql:latest
+    ports:
+      - "3309:3306"
+    environment:
+      MYSQL_USER: programmer
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: user
+    restart: unless-stopped
+    volumes:
+      - /home/programmer/Desktop/Programmer/docker/volumes/mysql_DB:/var/lib/mysql
+    networks:
+      - ussd-app-network
+
+volumes:
+  mysql_DB:
 
 networks:
   ussd-app-network:
-    driver: bridge        

@@ -1,4 +1,5 @@
 <?php
+
     // Print the response as plain text so that the gateway can read it
     header('Content-type: text/plain');
 
@@ -7,10 +8,16 @@
     * When working from a live server change the GET[] method 
     * to POST[] (that is how africastalking do their stuff) 
     */ 
-    $phone = $_GET['phoneNumber'];
+    $phone_number = $_GET['phoneNumber'];
     $session_id = $_GET['sessionId'];
     $service_code = $_GET['serviceCode'];
     $ussd_string = $_GET['text'];
+
+    // Database configuration
+    $servername = "db";
+    $username = "programmer";
+    $password = "Cyberman@2999";
+    $dbname = "users";
 
     /*
      * Split text input based on asteriks(*)
@@ -32,33 +39,59 @@
         $level = count($ussd_string_explode);
     }
 
-    /*
-     * $level=0 means the user hasnt replied. We use levels to track the number of user replies
-     * show the home/first menu
-     */
-    if ($level == 0) {
-        display_menu();
-    }
 
-    // $level>0 means the user has entered an option
-    else if ($level > 0) {
-        switch($ussd_string_explode[0]) {
-            case 1:
-                crop_production($ussd_string_explode);
-                break;
-            
-            case 2:
-                animal_production($ussd_string_explode);
-                break;  
-               
-            default:
-                echo "Invalid response"; 
-                break;
-        }
+    // Create database connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    // Check db connection
+    if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
     }
+    
+    
+
+
+    
+
+    
+
+
+    // if user is in the db then save the menu
+    else {
+
+        /*
+        * $level=0 means the user hasnt replied. We use levels to track the number of user replies
+        * show the home/first menu
+        */
+        if ($level == 0) {
+            display_menu();
+        }
+
+        // $level>0 means the user has entered an option
+        else if ($level > 0) {
+            switch($ussd_string_explode[0]) {
+                case 1:
+                    crop_production($ussd_string_explode);
+                    break;
+                
+                case 2:
+                    animal_production($ussd_string_explode);
+                    break;  
+                
+                default:
+                    echo "Invalid response"; 
+                    break;
+            }
+        }   
+    }  
 
     function display_menu() {
         $ussd_string = "WELCOME TO ULIMI WATHU \n \n 1. Crop production \n 2. Animal production \n";
+        ussd_proceed($ussd_string);
+    }
+
+    function display_registration_menu() {
+        $ussd_string = "WELCOME TO ULIMI WATHU \nREGISTRATION MENU \n 1. Register \n 2. Exit \n";
         ussd_proceed($ussd_string);
     }
 
@@ -72,7 +105,6 @@
         else if (count($ussd_string_exploded) == 2) {
             $option = $ussd_string_exploded[1];
 
-            
             if ($option == "1" || $option == "2") {
                 $ussd_string = "Please Select: \n \n1. Husbandry practices \n2. Pests and dieseases \n";
                 ussd_proceed($ussd_string);
@@ -81,7 +113,6 @@
             else {
                 echo "Invalid response";
             } 
-           
         }
 
         else if(count($ussd_string_exploded) == 3) {
@@ -108,7 +139,6 @@
                 ussd_proceed($ussd_string);
             }
             
-
             /* 
             *handle groundnuts level 3
             *
@@ -120,8 +150,6 @@
                 $ussd_string .= "groundnuts practices 1.\nPress n to proceed.";
                 ussd_proceed($ussd_string);
             }
-
-            
 
             else {
                 echo "Invalid input";
@@ -190,7 +218,6 @@
             else {
                 echo "Invalid input";
             }
-
         }
 
         else if (count($ussd_string_exploded) == 5) {
@@ -307,7 +334,6 @@
             else {
                 echo "Invalid input";
             }
-
         }
 
         else if (count($ussd_string_exploded) == 7) {
@@ -334,7 +360,6 @@
             else {
                 echo "Invalid input";
             }
-
         }
 
         else if (count($ussd_string_exploded) == 8 ) {
@@ -362,11 +387,8 @@
             else {
                 echo "Invalid input";
             }
-
         }  
-
     }
-
 
 
     function animal_production($ussd_string_exploded) {
@@ -392,16 +414,7 @@
         echo "END $ussd_string";
     }
 
+
     
-     
-
-
-
-
-
-
-
-
-
 
 ?>
