@@ -48,7 +48,68 @@
     die("Connection failed: " . $conn->connect_error);
     }
     
-    
+    $phoneNumber = $phone_number;
+
+    // Check if the user is already in database 
+    $sql7 = "SELECT * FROM user WHERE phone_number LIKE '%".$phoneNumber."%' LIMIT 1";
+	$userQuery=$conn->query($sql7);
+	$userAvailable=$userQuery->fetch_assoc();
+
+    // if user is not available register
+    if (!$userAvailable) {
+
+        if ( $level == 0) {
+            display_registration_menu();  
+        }
+
+        else if ($level > 0) {
+
+            if (count($ussd_string_explode) == 1) {
+                $ussd_string = "Enter your first name:\n";
+                ussd_proceed($ussd_string);
+            }
+
+            else if (count($ussd_string_explode) == 2) {
+                $ussd_string = "Enter your last name:\n";
+                ussd_proceed($ussd_string);
+            }
+
+            else if (count($ussd_string_explode) == 3) {
+                $ussd_string = "Enter your email:\n";
+                ussd_proceed($ussd_string);
+            }
+
+            else if (count($ussd_string_explode) == 4) {
+                $ussd_string = "Enter your district:\n";
+                ussd_proceed($ussd_string);
+            }
+
+            else if (count($ussd_string_explode) == 5) {
+                $ussd_string = "Enter your village:\n";
+                ussd_proceed($ussd_string);
+            }
+
+            if (count($ussd_string_explode) == 6) {
+                $query_1 = "INSERT INTO user (first_name, last_name, phone_number) VALUES (?, ?, ?)";
+                $sql = $conn->prepare($query_1);
+
+                // bind parameters
+                $sql->bind_param("sss", $firstName, $lastName, $phoneNumber);
+
+                $firstName = $ussd_string_explode[1];
+                $lastName = $ussd_string_explode[2];
+                $phoneNumber = $phone_number;
+                $email = $ussd_string_explode[3];
+                $district = $ussd_string_explode[4];
+                $village =$ussd_string_explode[5];
+                $sql->execute();
+
+                $ussd_string = "Registered successfully";
+
+                ussd_stop($ussd_string);
+            }    
+        }
+    }
 
 
     
