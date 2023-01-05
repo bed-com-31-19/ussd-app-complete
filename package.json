@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "africastalking": "^0.5.7",
+    "mysql": "^2.18.1"
+  },
+  "name": "ussd-app",
+  "version": "1.0.0",
+  "description": "agri-extension-workers-app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node -r esm src/index.js"
+  },
+  "author": "programmer",
+  "license": "ISC",
+  "devDependencies": {
+    "esm": "^3.2.25"
+  }
+}
