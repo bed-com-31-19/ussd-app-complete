@@ -8,10 +8,10 @@
     * When working from a live server change the GET[] method 
     * to POST[] (that is how africastalking do their stuff) 
     */ 
-    $phone_number = $_GET['phoneNumber'];
-    $session_id = $_GET['sessionId'];
-    $service_code = $_GET['serviceCode'];
-    $ussd_string = $_GET['text'];
+    $phone_number = $_POST['phoneNumber'];
+    $session_id = $_POST['sessionId'];
+    $service_code = $_POST['serviceCode'];
+    $ussd_string = $_POST['text'];
 
     // Database configuration
     $servername = "db";
