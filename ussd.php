@@ -47,6 +47,11 @@
     if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
     }
+
+    //create tables
+    // $sql1 = "CREATE TABLE user ( id INT(10) AUTO_INCREMENT PRIMARY KEY, first_name VARCHAR(20) NOT NULL, 
+    //     last_name VARCHAR(20) NOT NULL, phone_number VARCHAR(30) NOT NULL, 
+    //     email VARCHAR(30) NOT NULL, district VARCHAR(30) NOT NULL, village VARCHAR (30) NOT NULL)";
     
     $phoneNumber = $phone_number;
 
@@ -58,6 +63,10 @@
     // if user is not available register
     if (!$userAvailable) {
 
+        /*
+        * $level=0 means the user hasnt replied. We use levels to track the number of user replies
+        * show the home/first menu
+        */
         if ( $level == 0) {
             display_registration_menu();  
         }
@@ -90,11 +99,11 @@
             }
 
             if (count($ussd_string_explode) == 6) {
-                $query_1 = "INSERT INTO user (first_name, last_name, phone_number) VALUES (?, ?, ?)";
+                $query_1 = "INSERT INTO user (first_name, last_name, phone_number, email, district, village) VALUES (?, ?, ?, ?, ?, ?)";
                 $sql = $conn->prepare($query_1);
 
                 // bind parameters
-                $sql->bind_param("sss", $firstName, $lastName, $phoneNumber);
+                $sql->bind_param("ssssss", $firstName, $lastName, $phoneNumber, $email, $district, $village);
 
                 $firstName = $ussd_string_explode[1];
                 $lastName = $ussd_string_explode[2];
@@ -110,12 +119,6 @@
             }    
         }
     }
-
-
-    
-
-    
-
 
     // if user is in the db then save the menu
     else {
@@ -194,7 +197,7 @@
             else if ($option1 == "1" && $option2 == "1" && $option3 == "2") {
                 $ussd_string = "Please Select:\n";
                 $ussd_string .= "1. Diseases and Control\n";
-                $ussd_string .= "1. Pestes and Control \nPress n to proceed...";
+                $ussd_string .= "1. Pestes and Control";
                 ussd_proceed($ussd_string);
             }
             
@@ -233,7 +236,7 @@
             *
             *
             */
-            if ($option1 == "1" && $option2 == "1" && $option3 == "1" && $option4 == "n" || $option4 == "N") {
+            if ($option1 == "1" && $option2 == "1" && $option3 == "1" && $option4 == "n") {
                 $ussd_string = "Plant one seed per station, spaced at 25 - 30cm.\n";
                 $ussd_string .= "Seed need around 25kg/ha or 10kg/acre.\nPress n to proceed.";
                 ussd_proceed($ussd_string);
@@ -300,7 +303,7 @@
             */
             if ($option1 == "1" && $option2 == "1" && $option3 == "1" && $option4 == "n" && $option5 == "n" ) {
                 $ussd_string = "Apply 100 kg basal fertilizer preferably 23:21:0 + 4s at 5gms / plant just after emegency.\n";
-                $ussd_string .= "Keep the field weed free all the time.\n \nPress n to proceed.";
+                $ussd_string .= "Keep the field weed free all the time.\nPress n to proceed.";
                 ussd_proceed($ussd_string);
             }
 
@@ -394,7 +397,7 @@
             */
             if ($option1 == "1" && $option2 == "1" && $option3 == "1" && $option4 == "n" && $option5 == "n" && $option6 == "n") {
                 $ussd_string = "Apply top dressing fertlizer like urea, when plants are 30cm high or 21 days after emergency.\n";
-                $ussd_string .= "\nPress n to proceed.";
+                $ussd_string .= "Press n to proceed.";
                 ussd_proceed($ussd_string);
             }
 
@@ -430,7 +433,7 @@
             */
             if ($option1 == "1" && $option2 == "1" && $option3 == "1" && $option4 == "n" && $option5 == "n" && $option6 == "n" && $option7 == "n") {
                 $ussd_string = "Harvest when the crop is at 18% moisture content and leave it to dry in granaries.\n";
-                $ussd_string .= "\nPress n to proceed.";
+                $ussd_string .= "Press n to proceed.";
                 ussd_proceed($ussd_string);
             }
 
@@ -446,8 +449,6 @@
                 ussd_stop($ussd_string);
             }
 
-            
-
             else {
                 echo "Invalid input";
             }
@@ -462,7 +463,6 @@
             $option6 = $ussd_string_exploded[5];
             $option7 = $ussd_string_exploded[6];
             $option8 = $ussd_string_exploded[7];
-            print_r($ussd_string_exploded);
 
             /* 
             *handle maize level 8
@@ -471,11 +471,9 @@
             */
             if ($option1 == "1" && $option2 == "1" && $option3 == "1" && $option4 == "n" && $option5 == "n" && $option6 == "n" && $option7 == "n"&& $option8 == "n") {
                 $ussd_string = "Shell and bag when the crop is at 12.5% moisture content. \nRemember to treat with pesticide to avoid weavil.\n";
-                $ussd_string .= "\nThank you for using Ulimi wathu app";
-                ussd_proceed($ussd_string);
+                $ussd_string .= "*Thank You for using Ulimi Wathu*";
+                ussd_stop($ussd_string);
             }
-
-
 
             else {
                 echo "Invalid input";
@@ -485,8 +483,160 @@
 
 
     function animal_production($ussd_string_exploded) {
-        $ussd_string = "Please Select: \n \n 1. Chicken production \n 2. Sheep production \n";
-        ussd_proceed($ussd_string);
+
+        /* 
+        *handle chicken level 1
+        *
+        *
+        */
+        if (count($ussd_string_exploded) == 1) {
+            $ussd_string = "Please Select: \n1. Chicken production";
+            ussd_proceed($ussd_string);
+        }
+
+        /* 
+        *handle chicken level 2
+        *
+        *
+        */
+        else if (count($ussd_string_exploded) == 2) {
+            $option = $ussd_string_exploded[1];
+
+            if ($option == "1") {
+                $ussd_string = "Please Select:\n1. Layers \n2. Broilers";
+                ussd_proceed($ussd_string);
+            }
+
+            else if ($option == "2") {
+                $ussd_string = "Please Select:\n1. Sheep Feeds \n1. Pestes and Diseases Control\n";
+                ussd_proceed($ussd_string);
+            }
+
+            else {
+                echo "Invalid response";
+            } 
+        }
+
+        /* 
+        *handle chicken level 3
+        *
+        *
+        */
+        else if(count($ussd_string_exploded) == 3) {
+            $option1 = $ussd_string_exploded[0];
+            $option2 = $ussd_string_exploded[1];
+            $option3 = $ussd_string_exploded[2];
+
+            /* 
+            *handle maize level 3
+            *
+            *
+            */
+            if($option1 == "2" && $option2 == "1" && $option3 == "1") {
+                $ussd_string = "Please Select: \n1. Layers Feeds \n2. Broilers Feeds";
+                ussd_proceed($ussd_string);
+            }
+
+            else {
+                echo "Invalid input";
+            }
+        }
+
+        /* 
+        *handle chicken level 4
+        *
+        *
+        */
+        else if (count($ussd_string_exploded) == 4) {
+            $option1 = $ussd_string_exploded[0];
+            $option2 = $ussd_string_exploded[1];
+            $option3 = $ussd_string_exploded[2];
+            $option4 = $ussd_string_exploded[3];
+
+            if ($option1 == "2" && $option2 == "1" && $option3 == "1" && $option4 == "1") {
+                $ussd_string = "Chicken mash:Given at day old and above for internal organs development.\n";
+                $ussd_string .= "Each bird should consume approximately 1.1kg of feed during the period.\nPress n to proceed";
+                ussd_proceed($ussd_string);
+            }
+
+            else {
+                echo "Invalid input";
+            }
+        }
+
+        /* 
+        *handle chicken level 5
+        *
+        *
+        */
+        else if (count($ussd_string_exploded) == 5) {
+            $option1 = $ussd_string_exploded[0];
+            $option2 = $ussd_string_exploded[1];
+            $option3 = $ussd_string_exploded[2];
+            $option4 = $ussd_string_exploded[3];
+            $option5 = $ussd_string_exploded[4];
+
+            if ($option1 == "2" && $option2 == "1" && $option3 == "1" && $option4 == "1" && $option5 == "n" ) {
+                $ussd_string = "Growers Mash: Given from 7 weeks to 18 weeks old";
+                $ussd_string .= "Each bird should feed 4.9kg during this period.\nPress n to proceed.";
+                ussd_proceed($ussd_string);
+            }
+
+            else {
+                echo "Invalid input";
+            }
+        }
+ 
+        /* 
+        *handle chicken level 6
+        *
+        *
+        */
+        else if (count($ussd_string_exploded) == 6) {
+
+            $option1 = $ussd_string_exploded[0];
+            $option2 = $ussd_string_exploded[1];
+            $option3 = $ussd_string_exploded[2];
+            $option4 = $ussd_string_exploded[3];
+            $option5 = $ussd_string_exploded[4];
+            $option6 = $ussd_string_exploded[5];
+
+            if ($option1 == "2" && $option2 == "1" && $option3 == "1" && $option4 == "1" && $option5 == "n" && $option6 == "n") {
+                $ussd_string = "Layers Mash: Given from 18 weeks up to Laying period.\n";
+                $ussd_string .= "Each bird should feed 115 - 125 grams of feed.\nPress n to proceed.";
+                ussd_proceed($ussd_string);
+            }
+
+            else {
+                echo "Invalid input";
+            }
+        }
+
+        /* 
+        *handle chicken level 7
+        *
+        *
+        */
+        else if (count($ussd_string_exploded) == 7) {
+            $option1 = $ussd_string_exploded[0];
+            $option2 = $ussd_string_exploded[1];
+            $option3 = $ussd_string_exploded[2];
+            $option4 = $ussd_string_exploded[3];
+            $option5 = $ussd_string_exploded[4];
+            $option6 = $ussd_string_exploded[5];
+            $option7 = $ussd_string_exploded[6];
+
+            if ($option1 == "2" && $option2 == "1" && $option3 == "1" && $option4 == "1" && $option5 == "n" && $option6 == "n" && $option7 == "n") {
+                $ussd_string = "Layers Concrete: Given to Chicken from 18 to the end of laying .\n";
+                $ussd_string .= "Mix 2 parts Layers Concentrate to 3 parts maize by mass.\n";
+                $ussd_string .= "*Thank You for using Ulimi Wathu*";
+                ussd_stop($ussd_string);
+            }
+       
+            else {
+                echo "Invalid input";
+            }
+        }
     }
 
     /*
@@ -506,8 +656,5 @@
     function ussd_stop($ussd_string){
         echo "END $ussd_string";
     }
-
-
-    
 
 ?>
