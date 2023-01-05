@@ -14,6 +14,11 @@ conn.connect(function (err) {
   if (err) throw err;
   conn.query("SELECT phone_number FROM user", function (err, results, fields) {
     if (err) throw err;
+    const phone = results.map((result) => {
+      return "+" + result.phone_number;
+    });
+    const phone_numbers = phone;
+    console.log(phone_numbers);
 
     const client = africastalking({
       apiKey:
@@ -22,7 +27,7 @@ conn.connect(function (err) {
     });
 
     client.SMS.send({
-      to: "+26588234314",
+      to: phone_numbers,
       message: "Hey there, we are testing ulimi wathu app",
       from: "ULIMI-WATHU",
     })
