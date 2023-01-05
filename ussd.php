@@ -180,7 +180,6 @@
             $option1 = $ussd_string_exploded[0];
             $option2 = $ussd_string_exploded[1];
             $option3 = $ussd_string_exploded[2];
-            print_r($ussd_string_exploded);
 
             /* 
             *handle maize level 3
@@ -201,7 +200,7 @@
             //groundnuts practices
             else if ($option1 == "1" && $option2 == "2" && $option3 == "1") {
                 $ussd_string = "Land preparation must be done early enough (July or August).\n";
-                $ussd_string .= "To allow decomposition of residues before the growing/rainy season.";
+                $ussd_string .= "To allow decomposition of residues before the growing/rainy season. \nPress n to proceed...";
                 ussd_proceed($ussd_string);
             }
 
@@ -223,7 +222,7 @@
             */
             if ($option1 == "1" && $option2 == "1" && $option3 == "1" && $option4 == "n" || $option4 == "N") {
                 $ussd_string = "Plant one seed per station, spaced at 25 - 30cm.\n";
-                $ussd_string .= "Seed need around 25kg/ha or 10kg/acre.\n \nPress n to proceed.";
+                $ussd_string .= "Seed need around 25kg/ha or 10kg/acre.\nPress n to proceed.";
                 ussd_proceed($ussd_string);
             }
 
@@ -249,8 +248,8 @@
             */
             else if ($option1 == "1" && $option2 == "2" && $option3 == "1" && $option4 == "n" || $option4 == "N") {
                 $ussd_string = "Plant with the first effective rains (approximately 25-30 mm).\n";
-                $ussd_string .= "Make a groove 5-6 cm deep on the middle of the ridge .\nPress n to proceed.";
-                $ussd_string .= "Drop a single seed every 15 cm (75cm X 15cm X 1).";
+                $ussd_string .= "Make a groove 5-6 cm deep on the middle of the ridge.\n";
+                $ussd_string .= "Drop a single seed every 15 cm (75cm X 15cm X 1).\nPress n to proceed.";
                 ussd_proceed($ussd_string);
             }
 
@@ -280,20 +279,19 @@
             $option3 = $ussd_string_exploded[2];
             $option4 = $ussd_string_exploded[3];
             $option5 = $ussd_string_exploded[4];
-            print_r($ussd_string_exploded);
 
             /* 
             *handle maize level 5
             *
             *
             */
-            if ($option1 == "1" && $option2 == "1" && $option3 == "1" && $option4 == "n" || $option4 == "N" && $option5 == "n" || $option5 == "N") {
+            if ($option1 == "1" && $option2 == "1" && $option3 == "1" && $option4 == "n" && $option5 == "n" ) {
                 $ussd_string = "Apply 100 kg basal fertilizer preferably 23:21:0 + 4s at 5gms / plant just after emegency.\n";
                 $ussd_string .= "Keep the field weed free all the time.\n \nPress n to proceed.";
                 ussd_proceed($ussd_string);
             }
 
-            else if ($option1 == "1" && $option2 == "1" && $option3 == "2" && $option4 == "1" && $option5 == "n" || $option5 == "N") {
+            else if ($option1 == "1" && $option2 == "1" && $option3 == "2" && $option4 == "1" && $option5 == "n") {
                 $ussd_string = "1.Early plant the entire field and pull up infected seedlings\n";
                 $ussd_string .= "2.Early planting using resistant varieties and treated with Thiran and Benomyl\n";
                 $ussd_string .= "3.Uprooting infected plants\n";
@@ -329,9 +327,9 @@
             * handle groundnuts level 5
             *
             */
-            else if ($option1 == "1" && $option2 == "2" && $option3 == "1" && $option4 == "n" && $option4 == "N" && $option5 == "n" || $option5 == "N") {
-                $ussd_string = "groundnuts practices 3\n";
-                $ussd_string .= "groundnuts practices 3.\nPress n to proceed.";
+            else if ($option1 == "1" && $option2 == "2" && $option3 == "1" && $option4 == "n" && $option5 == "n") {
+                $ussd_string = "Farmers should apply single superphosphate before or at sowing at a rate of 100 kg/ha.\n";
+                $ussd_string .= "Top dressing with Gypsum at a rate of 200 kg/ha when 30% of the plants have flowered.\nPress n to proceed.";
                 ussd_proceed($ussd_string);
             }
 
@@ -376,7 +374,6 @@
             $option4 = $ussd_string_exploded[3];
             $option5 = $ussd_string_exploded[4];
             $option6 = $ussd_string_exploded[5];
-            print_r($ussd_string_exploded);
 
             /* 
             *handle maize level 6
@@ -386,6 +383,17 @@
             if ($option1 == "1" && $option2 == "1" && $option3 == "1" && $option4 == "n" || $option4 == "N" && $option5 == "n" || $option5 == "N" && $option6 == "n" || $option6 == "N") {
                 $ussd_string = "Apply top dressing fertlizer like urea, when plants are 30cm high or 21 days after emergency.\n";
                 $ussd_string .= "\nPress n to proceed.";
+                ussd_proceed($ussd_string);
+            }
+
+            /* 
+            *handle groundnuts level 6
+            *
+            *
+            */
+            else if ($option1 == "1" && $option2 == "2" && $option3 == "1" && $option4 == "n" && $option5 == "n" && $option6 == "n") {
+                $ussd_string = "Harvest groundnut timely to avoid bleaching, dis-colouration of nuts \n";
+                $ussd_string .= "Maturity can be checked by lifting a few pods and examining the inside of the shell.\nPress n to proceed.";
                 ussd_proceed($ussd_string);
             }
 
@@ -402,18 +410,31 @@
             $option5 = $ussd_string_exploded[4];
             $option6 = $ussd_string_exploded[5];
             $option7 = $ussd_string_exploded[6];
-            print_r($ussd_string_exploded);
 
             /* 
             *handle maize level 7
             *
             *
             */
-            if ($option1 == "1" && $option2 == "1" && $option3 == "1" && $option4 == "n" || $option4 == "N" && $option5 == "n" || $option5 == "N" && $option6 == "n" || $option6 == "N" && $option7 == "n" || $option7 == "N") {
+            if ($option1 == "1" && $option2 == "1" && $option3 == "1" && $option4 == "n" && $option5 == "n" && $option6 == "n" && $option7 == "n") {
                 $ussd_string = "Harvest when the crop is at 18% moisture content and leave it to dry in granaries.\n";
                 $ussd_string .= "\nPress n to proceed.";
                 ussd_proceed($ussd_string);
             }
+
+            /* 
+            *handle groundnuts level 7
+            *
+            *
+            */
+            else if ($option1 == "1" && $option2 == "2" && $option3 == "1" && $option4 == "n" && $option5 == "n" && $option6 == "n" && $option7 == "n") {
+                $ussd_string = "Remove groundnut from straws using hands or groundnut strippers.\n";
+                $ussd_string .= "Store the groundnuts in pods and in well ventilated containers.\n";
+                $ussd_string .= "*Thank You for using Ulimi Wathu*";
+                ussd_stop($ussd_string);
+            }
+
+            
 
             else {
                 echo "Invalid input";
@@ -441,6 +462,8 @@
                 $ussd_string .= "\nThank you for using Ulimi wathu app";
                 ussd_proceed($ussd_string);
             }
+
+
 
             else {
                 echo "Invalid input";
