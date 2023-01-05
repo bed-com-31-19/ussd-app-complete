@@ -147,7 +147,7 @@
     }  
 
     function display_menu() {
-        $ussd_string = "WELCOME TO ULIMI WATHU \n \n 1. Crop production \n 2. Animal production \n";
+        $ussd_string = "WELCOME TO ULIMI WATHU\n 1. Crop production \n2. Animal production\n";
         ussd_proceed($ussd_string);
     }
 
@@ -159,7 +159,7 @@
     function crop_production($ussd_string_exploded) {
 
         if (count($ussd_string_exploded) == 1 ) {
-            $ussd_string = "Please Select: \n \n 1. Maize production \n 2. Groundnuts production \n";
+            $ussd_string = "Please Select: \n1. Maize production \n2. Groundnuts production\n";
             ussd_proceed($ussd_string);	  
         }
 
@@ -167,7 +167,7 @@
             $option = $ussd_string_exploded[1];
 
             if ($option == "1" || $option == "2") {
-                $ussd_string = "Please Select: \n \n1. Husbandry practices \n2. Pests and dieseases \n";
+                $ussd_string = "Please Select:\n1. Husbandry practice \n2. Pestes and Diseases Control\n";
                 ussd_proceed($ussd_string);
             }
 
@@ -191,6 +191,12 @@
                 $ussd_string .= "Make ridges or rows at 60 - 75cm.\nPress n to proceed.";
                 ussd_proceed($ussd_string);
             }
+            else if ($option1 == "1" && $option2 == "1" && $option3 == "2") {
+                $ussd_string = "Please Select:\n";
+                $ussd_string .= "1. Diseases and Control\n";
+                $ussd_string .= "1. Pestes and Control \nPress n to proceed...";
+                ussd_proceed($ussd_string);
+            }
             
             /* 
             *handle groundnuts level 3
@@ -201,6 +207,13 @@
             else if ($option1 == "1" && $option2 == "2" && $option3 == "1") {
                 $ussd_string = "Land preparation must be done early enough (July or August).\n";
                 $ussd_string .= "To allow decomposition of residues before the growing/rainy season. \nPress n to proceed...";
+                ussd_proceed($ussd_string);
+            }
+
+            else if ($option1 == "1" && $option2 == "2" && $option3 == "2") {
+                $ussd_string = "Please Select:\n";
+                $ussd_string .= "1. Diseases and Control\n";
+                $ussd_string .= "1. Pestes and Control \nPress n to proceed...";
                 ussd_proceed($ussd_string);
             }
 
@@ -254,17 +267,17 @@
             }
 
             else if ($option1 == "1" && $option2 == "2" && $option3 == "2" && $option4 == "1") {
-                $ussd_string = "Desease 1\n";
-                $ussd_string .= "Desease 2.\n";
-                $ussd_string .= "Desease 3.\nPress n for desease control.";
+                $ussd_string = "1. Groundnut Rosette\n";
+                $ussd_string .= "2. Early and Late leaf spots\n";
+                $ussd_string .= "3. Rust\nPress n for disease control.";
                 ussd_proceed($ussd_string);
             }
 
             else if ($option1 == "1" && $option2 == "2" && $option3 == "2" && $option4 == "2") {
-                $ussd_string = "Please select for pest control:\n";
-                $ussd_string .= "Pest 1\n";
-                $ussd_string .= "Pest 2.\n";
-                $ussd_string .= "Pest 3.";
+                $ussd_string = "Please select pest for control:\n";
+                $ussd_string .= "1. Termites\n";
+                $ussd_string .= "2. Aphids \n";
+                $ussd_string .= "3. Hilda spp";
                 ussd_proceed($ussd_string);
             }
 
@@ -333,32 +346,31 @@
                 ussd_proceed($ussd_string);
             }
 
-            else if ($option1 == "1" && $option2 == "2" && $option3 == "2" && $option4 == "1" && $option5 == "n" || $option5 == "N") {
-                $ussd_string = "Groundnuts Desease Control page 1\n";
-                $ussd_string .= "Groundnuts Desease Contol page 1.\n";
-                $ussd_string .= "Groundnuts Desease Control page 1.\nPress n to proceed.";
-                ussd_proceed($ussd_string);
+            else if ($option1 == "1" && $option2 == "2" && $option3 == "2" && $option4 == "1" && $option5 == "n" ) {
+                $ussd_string = "1. Early sowing and crop rotation with a cereal.\n";
+                $ussd_string .= "2. Removing and destroying all volunteer crops.\n";
+               $ussd_string .= "*Thank You for using Ulimi Wathu*";
+                ussd_stop($ussd_string);
             }
 
             else if ($option1 == "1" && $option2 == "2" && $option3 == "2" && $option4 == "2" && $option5 == "1") {
-                $ussd_string = "Groundnuts Pest 1 Control\n";
-                $ussd_string .= "Groundnuts Pest 1 Control.\n";
-                $ussd_string .= "Groundnuts Pest 1 Control.\nPress n to proceed.";
-                ussd_proceed($ussd_string);
+                $ussd_string = "1. Deep ploughing. \n";
+                $ussd_string .= "2. Applying pesticides such as Dursban,\n";
+                $ussd_string .= "*Thank You for using Ulimi Wathu*";
+                ussd_stop($ussd_string);
             }
 
             else if ($option1 == "1" && $option2 == "2" && $option3 == "2" && $option4 == "2" && $option5 == "2") {
-                $ussd_string = "Groundnuts Pest 2 Control\n";
-                $ussd_string .= "Groundnuts Pest 2 Control.\n";
-                $ussd_string .= "Groundnuts Pest 2 Control.\nPress n to proceed.";
-                ussd_proceed($ussd_string);
+                $ussd_string = "1. Sowing early.\n";
+                $ussd_string .= "2. Removing volunteer crops.\n";
+                $ussd_string .= "*Thank You for using Ulimi Wathu*";
+                ussd_stop($ussd_string);
             }
 
             else if ($option1 == "1" && $option2 == "2" && $option3 == "2" && $option4 == "2" && $option5 == "3") {
-                $ussd_string = "Groundnuts Pest 3 Control\n";
-                $ussd_string .= "Groundnuts Pest 3 Control.\n";
-                $ussd_string .= "Groundnuts Pest 3 Control.\nPress n to proceed.";
-                ussd_proceed($ussd_string);
+                $ussd_string = "1. Keeping the groundnut field and area around the field free of weeds.\n";
+                $ussd_string .= "*Thank You for using Ulimi Wathu*";
+                ussd_stop($ussd_string);
             }
 
             else {
@@ -380,7 +392,7 @@
             *
             *
             */
-            if ($option1 == "1" && $option2 == "1" && $option3 == "1" && $option4 == "n" || $option4 == "N" && $option5 == "n" || $option5 == "N" && $option6 == "n" || $option6 == "N") {
+            if ($option1 == "1" && $option2 == "1" && $option3 == "1" && $option4 == "n" && $option5 == "n" && $option6 == "n") {
                 $ussd_string = "Apply top dressing fertlizer like urea, when plants are 30cm high or 21 days after emergency.\n";
                 $ussd_string .= "\nPress n to proceed.";
                 ussd_proceed($ussd_string);
@@ -457,7 +469,7 @@
             *
             *
             */
-            if ($option1 == "1" && $option2 == "1" && $option3 == "1" && $option4 == "n" || $option4 == "N" && $option5 == "n" || $option5 == "N" && $option6 == "n" || $option6 == "N" && $option7 == "n" || $option7 == "N" && $option8 == "n" || $option8 == "N") {
+            if ($option1 == "1" && $option2 == "1" && $option3 == "1" && $option4 == "n" && $option5 == "n" && $option6 == "n" && $option7 == "n"&& $option8 == "n") {
                 $ussd_string = "Shell and bag when the crop is at 12.5% moisture content. \nRemember to treat with pesticide to avoid weavil.\n";
                 $ussd_string .= "\nThank you for using Ulimi wathu app";
                 ussd_proceed($ussd_string);
