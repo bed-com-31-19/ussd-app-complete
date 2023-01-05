@@ -192,13 +192,6 @@
                 $ussd_string .= "Make ridges or rows at 60 - 75cm.\nPress n to proceed.";
                 ussd_proceed($ussd_string);
             }
-
-            //pest and disease control for maize or groundnuts
-            else if ($option1 == "1" && $option2 == "2" || $option2 == "1" && $option3 == "2") {
-                $ussd_string = "Please Select: \n \n1. Disease and Control\n";
-                $ussd_string .= "2. Pest and Control.\n";
-                ussd_proceed($ussd_string);
-            }
             
             /* 
             *handle groundnuts level 3
@@ -207,8 +200,8 @@
             */
             //groundnuts practices
             else if ($option1 == "1" && $option2 == "2" && $option3 == "1") {
-                $ussd_string = "groundnuts practices 1\n";
-                $ussd_string .= "groundnuts practices 1.\nPress n to proceed.";
+                $ussd_string = "Land preparation must be done early enough (July or August).\n";
+                $ussd_string .= "To allow decomposition of residues before the growing/rainy season.";
                 ussd_proceed($ussd_string);
             }
 
@@ -222,7 +215,6 @@
             $option2 = $ussd_string_exploded[1];
             $option3 = $ussd_string_exploded[2];
             $option4 = $ussd_string_exploded[3];
-            print_r($ussd_string_exploded);
 
             /* 
             *handle maize level 4
@@ -236,17 +228,17 @@
             }
 
             else if ($option1 == "1" && $option2 == "1" && $option3 == "2" && $option4 == "1") {
-                $ussd_string = "Maize Desease 1\n";
-                $ussd_string .= "Maize Desease 2.\n";
-                $ussd_string .= "Maize Desease 3.\nPress n for desease control.";
+                $ussd_string = "1. Maize streak virus\n";
+                $ussd_string .= "2. Leaf spots \n";
+                $ussd_string .= "3. Maize Lethal Necrosis.\nPress n for diseases control.";
                 ussd_proceed($ussd_string);
             }
 
             else if ($option1 == "1" && $option2 == "1" && $option3 == "2" && $option4 == "2") {
-                $ussd_string = "Please select for pest control:\n";
-                $ussd_string .= "Pest 1\n";
-                $ussd_string .= "Pest 2.\n";
-                $ussd_string .= "Pest 3.";
+                $ussd_string = "Please select pest for control:\n";
+                $ussd_string .= "1. Pink stem borer,\n";
+                $ussd_string .= "2. Fall Armyworm\n";
+                $ussd_string .= "3. Shoot fly";
                 ussd_proceed($ussd_string);
             }
 
@@ -256,8 +248,9 @@
             *
             */
             else if ($option1 == "1" && $option2 == "2" && $option3 == "1" && $option4 == "n" || $option4 == "N") {
-                $ussd_string = "groundnuts practices 2\n";
-                $ussd_string .= "groundnuts practices 2.\nPress n to proceed.";
+                $ussd_string = "Plant with the first effective rains (approximately 25-30 mm).\n";
+                $ussd_string .= "Make a groove 5-6 cm deep on the middle of the ridge .\nPress n to proceed.";
+                $ussd_string .= "Drop a single seed every 15 cm (75cm X 15cm X 1).";
                 ussd_proceed($ussd_string);
             }
 
@@ -301,38 +294,42 @@
             }
 
             else if ($option1 == "1" && $option2 == "1" && $option3 == "2" && $option4 == "1" && $option5 == "n" || $option5 == "N") {
-                $ussd_string = "Maize Desease Control page 1\n";
-                $ussd_string .= "Maize Desease Contol page 1.\n";
-                $ussd_string .= "Maize Desease Control page 1.\nPress n to proceed.";
-                ussd_proceed($ussd_string);
+                $ussd_string = "1.Early plant the entire field and pull up infected seedlings\n";
+                $ussd_string .= "2.Early planting using resistant varieties and treated with Thiran and Benomyl\n";
+                $ussd_string .= "3.Uprooting infected plants\n";
+                $ussd_string .= "*Thank You for using Ulimi Wathu*";
+                ussd_stop($ussd_string);
             }
 
             else if ($option1 == "1" && $option2 == "1" && $option3 == "2" && $option4 == "2" && $option5 == "1") {
-                $ussd_string = "Maize Pest 1 Control\n";
-                $ussd_string .= "Maize Pest 1 Control.\n";
-                $ussd_string .= "Maize Pest 1 Control.\nPress n to proceed.";
-                ussd_proceed($ussd_string);
+                $ussd_string = "1. Early planting, rotation of crops.\n";
+                $ussd_string .= "2. Deeply ploughing the soil.\n";
+                $ussd_string .= "3. Always weeding the plantation.\n";
+                $ussd_string .= "*Thank You for using Ulimi Wathu*";
+                ussd_stop($ussd_string);
             }
 
             else if ($option1 == "1" && $option2 == "1" && $option3 == "2" && $option4 == "2" && $option5 == "2") {
-                $ussd_string = "Maize Pest 2 Control\n";
-                $ussd_string .= "Maize Pest 2 Control.\n";
-                $ussd_string .= "Maize Pest 2 Control.\nPress n to proceed.";
-                ussd_proceed($ussd_string);
+                $ussd_string = "1. Collecting fall armyworms and killing them,\n";
+                $ussd_string .= "2. Using pesticides like Cypermethrin 4%+profenofos 40% at 1-2 ml of pesticide in1 l of water,\n";
+                $ussd_string .= "3. check whether there is no Fall armyworm outbreak.\n";
+                $ussd_string .= "*Thank You for using Ulimi Wathu*";
+                ussd_stop($ussd_string);
             }
 
             else if ($option1 == "1" && $option2 == "1" && $option3 == "2" && $option4 == "2" && $option5 == "3") {
-                $ussd_string = "Maize Pest 3 Control\n";
-                $ussd_string .= "Maize Pest 3 Control.\n";
-                $ussd_string .= "Maize Pest 3 Control.\nPress n to proceed.";
-                ussd_proceed($ussd_string);
+                $ussd_string = "1. Regular surveillance of the plantation\n";
+                $ussd_string .= "2. Lambda-Cyhalothrin 50g/l, at 1-2 ml in 1l of water.\n";
+                $ussd_string .= "3. Crop rotation of cereals with legumes or tubers\n";
+                $ussd_string .= "*Thank You for using Ulimi Wathu*";
+                ussd_stop($ussd_string);
             }
 
             /* 
             * handle groundnuts level 5
             *
             */
-            if ($option1 == "1" && $option2 == "2" && $option3 == "1" && $option4 == "n" && $option4 == "N" && $option5 == "n" || $option5 == "N") {
+            else if ($option1 == "1" && $option2 == "2" && $option3 == "1" && $option4 == "n" && $option4 == "N" && $option5 == "n" || $option5 == "N") {
                 $ussd_string = "groundnuts practices 3\n";
                 $ussd_string .= "groundnuts practices 3.\nPress n to proceed.";
                 ussd_proceed($ussd_string);
