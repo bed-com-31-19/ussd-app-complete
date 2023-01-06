@@ -3,7 +3,7 @@ import africastalking from "africastalking";
 const mysql = require("mysql");
 
 const conn = mysql.createConnection({
-  host: "localhost",
+  servername: "localhost",
   user: "programmer",
   password: "Cyberman@2999",
   database: "users",
@@ -15,7 +15,7 @@ conn.connect(function (err) {
   conn.query("SELECT phone_number FROM user", function (err, results, fields) {
     if (err) throw err;
     const phone = results.map((result) => {
-      return "+" + result.phone_number;
+      return "+" +result.phone_number;
     });
     const phone_numbers = phone;
     console.log(phone_numbers);
@@ -28,7 +28,8 @@ conn.connect(function (err) {
 
     client.SMS.send({
       to: phone_numbers,
-      message: "Hey there, we are testing ulimi wathu app",
+      message:
+        "Dear extension workers, fertilizer is now available in the deports",
       from: "ULIMI-WATHU",
     })
       .then(() => console.log("Message sent successifully"))
