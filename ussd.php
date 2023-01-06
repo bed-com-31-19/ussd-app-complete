@@ -49,6 +49,7 @@
     }
 
     //create tables
+	// $sql0 = "CREATE DATABASE users";
     // $sql1 = "CREATE TABLE user ( id INT(10) AUTO_INCREMENT PRIMARY KEY, first_name VARCHAR(20) NOT NULL, 
     //     last_name VARCHAR(20) NOT NULL, phone_number VARCHAR(30) NOT NULL, 
     //     email VARCHAR(30) NOT NULL, district VARCHAR(30) NOT NULL, village VARCHAR (30) NOT NULL)";
@@ -170,7 +171,7 @@
             $option = $ussd_string_exploded[1];
 
             if ($option == "1" || $option == "2") {
-                $ussd_string = "Please Select:\n1. Husbandry practice \n2. Pestes and Diseases Control\n";
+                $ussd_string = "Please Select:\n1. Husbandry practice \n2. Pests and Diseases Control\n";
                 ussd_proceed($ussd_string);
             }
 
@@ -197,7 +198,7 @@
             else if ($option1 == "1" && $option2 == "1" && $option3 == "2") {
                 $ussd_string = "Please Select:\n";
                 $ussd_string .= "1. Diseases and Control\n";
-                $ussd_string .= "1. Pestes and Control";
+                $ussd_string .= "2. Pests and Control";
                 ussd_proceed($ussd_string);
             }
             
@@ -216,7 +217,7 @@
             else if ($option1 == "1" && $option2 == "2" && $option3 == "2") {
                 $ussd_string = "Please Select:\n";
                 $ussd_string .= "1. Diseases and Control\n";
-                $ussd_string .= "1. Pestes and Control \nPress n to proceed...";
+                $ussd_string .= "2. Pests and Control \nPress n to proceed...";
                 ussd_proceed($ussd_string);
             }
 
@@ -508,7 +509,7 @@
             }
 
             else if ($option == "2") {
-                $ussd_string = "Please Select:\n1. Sheep Feeds \n1. Pestes and Diseases Control\n";
+                $ussd_string = "Please Select:\n1. Sheep Feeds \n1. Pests and Diseases Control\n";
                 ussd_proceed($ussd_string);
             }
 
